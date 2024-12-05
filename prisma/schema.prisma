@@ -14,10 +14,23 @@ datasource db {
 }
 
 model Weather {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   cityName    String
   temperature Float
+  feelsLike   Float?
   humidity    Int
+  pressure    Int?
+  windSpeed   Float?
+  windDir     Int?
+  visibility  Int?
+  cloudiness  Int?
+  rainVolume  Float?
+  snowVolume  Float?
+  uvIndex     Float?
+  sunrise     DateTime?
+  sunset      DateTime?
+  description String?
   source      String
-  createdAt   DateTime @default(now())
+  date        DateTime
+  createdAt   DateTime  @default(now())
 }

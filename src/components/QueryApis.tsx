@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function QueryAPIs() {
   const [city, setCity] = useState("");
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -20,10 +21,12 @@ export default function QueryAPIs() {
       const openWeatherResponse = await fetch(
         `/api/fetch-weather?source=openweathermap&city=${encodeURIComponent(
           city
-        )}`
+        )}&date=${date}`
       );
       const weatherAPIResponse = await fetch(
-        `/api/fetch-weather?source=weatherapi&city=${encodeURIComponent(city)}`
+        `/api/fetch-weather?source=weatherapi&city=${encodeURIComponent(
+          city
+        )}&date=${date}`
       );
 
       if (!openWeatherResponse.ok || !weatherAPIResponse.ok) {
@@ -33,12 +36,17 @@ export default function QueryAPIs() {
       const openWeatherData = await openWeatherResponse.json();
       const weatherAPIData = await weatherAPIResponse.json();
 
+      const dataToSave = [weatherAPIData];
+      if (openWeatherData) {
+        dataToSave.push(openWeatherData);
+      }
+
       const saveResponse = await fetch("/api/save-weather", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify([openWeatherData, weatherAPIData]),
+        body: JSON.stringify(dataToSave),
       });
 
       if (!saveResponse.ok) {
@@ -70,6 +78,22 @@ export default function QueryAPIs() {
             id="city"
             value={city}
             onChange={(e) => setCity(e.target.value)}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="date"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Date
+          </label>
+          <input
+            type="date"
+            id="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             required
           />

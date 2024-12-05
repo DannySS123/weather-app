@@ -1,0 +1,21 @@
+export interface WeatherData {
+    id: number;
+    cityName: string;
+    temperature: number;
+    feelsLike: number | null;
+    humidity: number;
+    pressure: number | null;
+    windSpeed: number | null;
+    windDir: number | null;
+    visibility: number | null;
+    cloudiness: number | null;
+    rainVolume: number | null;
+    snowVolume: number | null;
+    uvIndex: number | null;
+    sunrise: string | null;
+    sunset: string | null;
+    description: string | null;
+    source: string;
+    date: string;
+    createdAt: string;
+  };

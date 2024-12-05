@@ -6,9 +6,11 @@ export async function POST(request: Request) {
     const weatherDataArray = await request.json()
 
     for (const weatherData of weatherDataArray) {
-      await prisma.weather.create({
-        data: weatherData,
-      })
+        if (weatherData) {
+            await prisma.weather.create({
+                data: weatherData
+            })
+        }
     }
 
     return NextResponse.json({ message: 'Weather data saved successfully' })

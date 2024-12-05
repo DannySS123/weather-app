@@ -6,7 +6,7 @@ import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Weather Statistics Dashboard",
+  title: "Weather App",
   description:
     "View and analyze weather data with interactive charts and filters",
 };

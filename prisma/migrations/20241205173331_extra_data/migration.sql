@@ -1,0 +1,14 @@
+-- AlterTable
+ALTER TABLE "Weather" ADD COLUMN     "cloudiness" INTEGER,
+ADD COLUMN     "description" TEXT,
+ADD COLUMN     "feelsLike" DOUBLE PRECISION,
+ADD COLUMN     "pressure" INTEGER,
+ADD COLUMN     "rainVolume" DOUBLE PRECISION,
+ADD COLUMN     "snowVolume" DOUBLE PRECISION,
+ADD COLUMN     "sunrise" TIMESTAMP(3),
+ADD COLUMN     "sunset" TIMESTAMP(3),
+ADD COLUMN     "uvIndex" DOUBLE PRECISION,
+ADD COLUMN     "visibility" INTEGER,
+ADD COLUMN     "windDir" INTEGER,
+ADD COLUMN     "windSpeed" DOUBLE PRECISION,
+ALTER COLUMN "date" DROP DEFAULT;
