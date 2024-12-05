@@ -81,8 +81,11 @@ export async function GET(request: Request) {
       const response = await axios.get(url)
       const data = response.data
 
-      const currentData = data.currentConditions
-
+      const normalizeDate = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+      const isHistorical = normalizeDate(new Date(date)) < normalizeDate(new Date());
+      
+      const currentData = isHistorical ? data.days[0] : data.currentConditions
+      
       weatherData = {
         cityName: data.address,
         temperature: currentData.temp,
