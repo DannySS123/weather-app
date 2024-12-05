@@ -16,6 +16,7 @@ import { WeatherData } from "@/app/models/weather-model";
 import { Table } from "./Table";
 import { Averages } from "./Averages";
 import { Chart } from "./Chart";
+import { Extremes } from "./Extremes";
 
 ChartJS.register(
   CategoryScale,
@@ -101,6 +102,7 @@ export default function WeatherDashboard() {
         />
       </div>
       <Averages weatherData={weatherData} />
+      <Extremes weatherData={weatherData} />
       <Chart weatherData={weatherData} />
       <Table weatherData={sortedData} requestSort={requestSort} />
     </div>
