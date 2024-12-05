@@ -49,25 +49,25 @@ export const Averages = ({ weatherData }: Props) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
-      <div className="bg-blue-100 p-4 rounded-lg">
+      <div className="bg-red-100 p-4 rounded-lg">
         <h3 className="text-lg font-semibold mb-2">Avg Temperature</h3>
-        <p className="text-2xl font-bold text-blue-600">{avgTemp}°C</p>
+        <p className="text-2xl font-bold text-red-600">{avgTemp}°C</p>
+      </div>
+      <div className="bg-blue-100 p-4 rounded-lg">
+        <h3 className="text-lg font-semibold mb-2">Avg Humidity</h3>
+        <p className="text-2xl font-bold text-blue-600">{avgHumidity}%</p>
       </div>
       <div className="bg-green-100 p-4 rounded-lg">
-        <h3 className="text-lg font-semibold mb-2">Avg Humidity</h3>
-        <p className="text-2xl font-bold text-green-600">{avgHumidity}%</p>
-      </div>
-      <div className="bg-yellow-100 p-4 rounded-lg">
         <h3 className="text-lg font-semibold mb-2">Avg Wind Speed</h3>
-        <p className="text-2xl font-bold text-yellow-600">{avgWindSpeed} m/s</p>
+        <p className="text-2xl font-bold text-green-600">{avgWindSpeed} m/s</p>
       </div>
       <div className="bg-purple-100 p-4 rounded-lg">
         <h3 className="text-lg font-semibold mb-2">Avg Pressure</h3>
         <p className="text-2xl font-bold text-purple-600">{avgPressure} hPa</p>
       </div>
-      <div className="bg-red-100 p-4 rounded-lg">
+      <div className="bg-yellow-100 p-4 rounded-lg">
         <h3 className="text-lg font-semibold mb-2">Avg UV Index</h3>
-        <p className="text-2xl font-bold text-red-600">{avgUvIndex}</p>
+        <p className="text-2xl font-bold text-yellow-600">{avgUvIndex}</p>
       </div>
     </div>
   );
