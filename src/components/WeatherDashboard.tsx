@@ -43,7 +43,6 @@ export default function WeatherDashboard() {
   });
 
   useEffect(() => {
-    console.log(cityFilter);
     fetchWeatherData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [startDate, endDate, cityFilter]);
@@ -56,7 +55,6 @@ export default function WeatherDashboard() {
 
     const response = await fetch(`/api/weather?${queryParams.toString()}`);
     const data = await response.json();
-    console.log(data);
     setWeatherData(data);
   };
 

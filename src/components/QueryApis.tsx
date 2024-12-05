@@ -28,15 +28,25 @@ export default function QueryAPIs() {
           city
         )}&date=${date}`
       );
+      const visualcrossingAPIResponse = await fetch(
+        `/api/fetch-weather?source=visualcrossing&city=${encodeURIComponent(
+          city
+        )}&date=${date}`
+      );
 
-      if (!openWeatherResponse.ok || !weatherAPIResponse.ok) {
+      if (
+        !openWeatherResponse.ok ||
+        !weatherAPIResponse.ok ||
+        !visualcrossingAPIResponse.ok
+      ) {
         throw new Error("Failed to fetch weather data");
       }
 
       const openWeatherData = await openWeatherResponse.json();
       const weatherAPIData = await weatherAPIResponse.json();
+      const visualcrossingAPIData = await visualcrossingAPIResponse.json();
 
-      const dataToSave = [weatherAPIData];
+      const dataToSave = [weatherAPIData, visualcrossingAPIData];
       if (openWeatherData) {
         dataToSave.push(openWeatherData);
       }

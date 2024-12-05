@@ -3,6 +3,7 @@ import axios from 'axios'
 
 const OPEN_WEATHER_MAP_API_KEY = process.env.OPEN_WEATHER_MAP_API_KEY
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY
+const VISUAL_CROSSING_API_KEY = process.env.VISUAL_CROSSING_API_KEY
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -73,6 +74,32 @@ export async function GET(request: Request) {
         sunset: new Date(`${date} ${astroData.sunset}`),
         description: dayData.condition.text,
         source: 'WeatherAPI',
+        date: new Date(date),
+      }
+    } else if (source === 'visualcrossing') {
+      const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${date}?unitGroup=metric&key=${VISUAL_CROSSING_API_KEY}&contentType=json`
+      const response = await axios.get(url)
+      const data = response.data
+
+      const currentData = data.currentConditions
+
+      weatherData = {
+        cityName: data.address,
+        temperature: currentData.temp,
+        feelsLike: currentData.feelslike,
+        humidity: currentData.humidity,
+        pressure: currentData.pressure,
+        windSpeed: currentData.windspeed,
+        windDir: currentData.winddir,
+        visibility: currentData.visibility,
+        cloudiness: currentData.cloudcover,
+        rainVolume: currentData.precip,
+        snowVolume: null,
+        uvIndex: currentData.uvindex,
+        sunrise: new Date(currentData.sunrise * 1000),
+        sunset: new Date(currentData.sunset * 1000),
+        description: currentData.conditions,
+        source: 'VisualCrossing',
         date: new Date(date),
       }
     } else {
