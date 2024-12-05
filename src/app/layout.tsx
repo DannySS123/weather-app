@@ -34,6 +34,12 @@ export default function RootLayout({
               >
                 Query APIs
               </Link>
+              <Link
+                href="/best-destination"
+                className="text-white hover:text-blue-200"
+              >
+                Best Travel Destination
+              </Link>
             </div>
           </div>
         </nav>
